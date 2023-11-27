@@ -31,9 +31,7 @@ jobs:
             git add version.txt
             git commit -m "Update version.txt"
             git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-            git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            git push origin HEAD:master
 
       - name: Release
         uses: softprops/action-gh-release@v1
