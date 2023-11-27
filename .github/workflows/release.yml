@@ -20,9 +20,8 @@ jobs:
           git fetch --prune --depth=30
           latestVersionTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
   
-          echo "$latestVersionTag"
-          echo "$updatedContent" > version.txt
-          cat version.txt
+          echo "$latestVersionTag" > version.txt
+          car version.txt
 
       - name: Commit changes
         run: |
