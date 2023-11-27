@@ -21,7 +21,7 @@ jobs:
           latestVersionTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
   
           echo "$latestVersionTag" > version.txt
-          car version.txt
+          cat version.txt
 
       - name: Commit changes
         run: |
