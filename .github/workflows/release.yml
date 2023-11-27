@@ -14,12 +14,14 @@ jobs:
 
       - name: Update version.txt
         run: |
-          git fetch --tags --force
+          git fetch --prune --depth=30
           latestVersionTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
   
           echo "$latestVersionTag"
           echo "$updatedContent" > version.txt
-          echo version.txt
+          cat version.txt
 
       - name: Release
         uses: softprops/action-gh-release@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
