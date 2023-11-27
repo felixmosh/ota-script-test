@@ -24,6 +24,17 @@ jobs:
           echo "$updatedContent" > version.txt
           cat version.txt
 
+      - name: Commit changes
+        run: |
+            git config --global user.email "no-reply@github.com"
+            git config --global user.name "GitHub Actions"
+            git add version.txt
+            git commit -m "Update version.txt"
+            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+            git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
