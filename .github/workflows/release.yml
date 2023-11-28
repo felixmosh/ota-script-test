@@ -14,24 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Update version.txt
-        run: |
-          git fetch --prune --depth=30
-          latestVersionTag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
-  
-          echo "$latestVersionTag" > version.txt
-          cat version.txt
-
-      - name: Commit changes
-        run: |
-            git config --global user.email "no-reply@github.com"
-            git config --global user.name "GitHub Actions"
-            git add version.txt
-            git commit -m "Update version.txt"
-            git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-            git push origin HEAD:master
-            
-
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
